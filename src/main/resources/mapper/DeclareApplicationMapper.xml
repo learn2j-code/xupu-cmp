@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chhtf.cmp.mapper.DeclareApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.chhtf.cmp.pojo.DeclareApplication" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="aptitude_id" property="aptitudeId" jdbcType="INTEGER" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="application_time" property="applicationTime" jdbcType="VARCHAR" />
+    <result column="agency_id" property="agencyId" jdbcType="INTEGER" />
+    <result column="merchandiser_id" property="merchandiserId" jdbcType="INTEGER" />
+    <result column="current_progress" property="currentProgress" jdbcType="INTEGER" />
+    <result column="attachment_ids" property="attachmentIds" jdbcType="VARCHAR" />
+    <result column="progress_intro" property="progressIntro" jdbcType="VARCHAR" />
+    <result column="get_way" property="getWay" jdbcType="VARCHAR" />
+    <result column="declare_num" property="declareNum" jdbcType="INTEGER" />
+    <result column="service_fee" property="serviceFee" jdbcType="DECIMAL" />
+    <result column="expect_time" property="expectTime" jdbcType="VARCHAR" />
+    <result column="predict_time" property="predictTime" jdbcType="VARCHAR" />
+    <result column="actual_time" property="actualTime" jdbcType="VARCHAR" />
+    <result column="company_evaluate" property="companyEvaluate" jdbcType="VARCHAR" />
+    <result column="agency_evaluate" property="agencyEvaluate" jdbcType="VARCHAR" />
+    <result column="platform_evaluate" property="platformEvaluate" jdbcType="VARCHAR" />
+    <result column="company_comment" property="companyComment" jdbcType="VARCHAR" />
+    <result column="agency_comment" property="agencyComment" jdbcType="VARCHAR" />
+    <result column="platform_comment" property="platformComment" jdbcType="VARCHAR" />
+    <result column="string_field" property="stringField" jdbcType="VARCHAR" />
+    <result column="int_field" property="intField" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, aptitude_id, company_id, application_time, agency_id, merchandiser_id, current_progress, 
+    attachment_ids, progress_intro, get_way, declare_num, service_fee, expect_time, predict_time, 
+    actual_time, company_evaluate, agency_evaluate, platform_evaluate, company_comment, 
+    agency_comment, platform_comment, string_field, int_field, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chhtf.cmp.pojo.DeclareApplicationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from declare_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from declare_application
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from declare_application
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chhtf.cmp.pojo.DeclareApplicationExample" >
+    delete from declare_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chhtf.cmp.pojo.DeclareApplication" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into declare_application (aptitude_id, company_id, application_time, 
+      agency_id, merchandiser_id, current_progress, 
+      attachment_ids, progress_intro, get_way, 
+      declare_num, service_fee, expect_time, 
+      predict_time, actual_time, company_evaluate, 
+      agency_evaluate, platform_evaluate, company_comment, 
+      agency_comment, platform_comment, string_field, 
+      int_field, create_time, update_time
+      )
+    values (#{aptitudeId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{applicationTime,jdbcType=VARCHAR}, 
+      #{agencyId,jdbcType=INTEGER}, #{merchandiserId,jdbcType=INTEGER}, #{currentProgress,jdbcType=INTEGER}, 
+      #{attachmentIds,jdbcType=VARCHAR}, #{progressIntro,jdbcType=VARCHAR}, #{getWay,jdbcType=VARCHAR}, 
+      #{declareNum,jdbcType=INTEGER}, #{serviceFee,jdbcType=DECIMAL}, #{expectTime,jdbcType=VARCHAR}, 
+      #{predictTime,jdbcType=VARCHAR}, #{actualTime,jdbcType=VARCHAR}, #{companyEvaluate,jdbcType=VARCHAR}, 
+      #{agencyEvaluate,jdbcType=VARCHAR}, #{platformEvaluate,jdbcType=VARCHAR}, #{companyComment,jdbcType=VARCHAR}, 
+      #{agencyComment,jdbcType=VARCHAR}, #{platformComment,jdbcType=VARCHAR}, #{stringField,jdbcType=VARCHAR}, 
+      #{intField,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chhtf.cmp.pojo.DeclareApplication" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into declare_application
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aptitudeId != null" >
+        aptitude_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="applicationTime != null" >
+        application_time,
+      </if>
+      <if test="agencyId != null" >
+        agency_id,
+      </if>
+      <if test="merchandiserId != null" >
+        merchandiser_id,
+      </if>
+      <if test="currentProgress != null" >
+        current_progress,
+      </if>
+      <if test="attachmentIds != null" >
+        attachment_ids,
+      </if>
+      <if test="progressIntro != null" >
+        progress_intro,
+      </if>
+      <if test="getWay != null" >
+        get_way,
+      </if>
+      <if test="declareNum != null" >
+        declare_num,
+      </if>
+      <if test="serviceFee != null" >
+        service_fee,
+      </if>
+      <if test="expectTime != null" >
+        expect_time,
+      </if>
+      <if test="predictTime != null" >
+        predict_time,
+      </if>
+      <if test="actualTime != null" >
+        actual_time,
+      </if>
+      <if test="companyEvaluate != null" >
+        company_evaluate,
+      </if>
+      <if test="agencyEvaluate != null" >
+        agency_evaluate,
+      </if>
+      <if test="platformEvaluate != null" >
+        platform_evaluate,
+      </if>
+      <if test="companyComment != null" >
+        company_comment,
+      </if>
+      <if test="agencyComment != null" >
+        agency_comment,
+      </if>
+      <if test="platformComment != null" >
+        platform_comment,
+      </if>
+      <if test="stringField != null" >
+        string_field,
+      </if>
+      <if test="intField != null" >
+        int_field,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aptitudeId != null" >
+        #{aptitudeId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationTime != null" >
+        #{applicationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null" >
+        #{agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="merchandiserId != null" >
+        #{merchandiserId,jdbcType=INTEGER},
+      </if>
+      <if test="currentProgress != null" >
+        #{currentProgress,jdbcType=INTEGER},
+      </if>
+      <if test="attachmentIds != null" >
+        #{attachmentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="progressIntro != null" >
+        #{progressIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="getWay != null" >
+        #{getWay,jdbcType=VARCHAR},
+      </if>
+      <if test="declareNum != null" >
+        #{declareNum,jdbcType=INTEGER},
+      </if>
+      <if test="serviceFee != null" >
+        #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="expectTime != null" >
+        #{expectTime,jdbcType=VARCHAR},
+      </if>
+      <if test="predictTime != null" >
+        #{predictTime,jdbcType=VARCHAR},
+      </if>
+      <if test="actualTime != null" >
+        #{actualTime,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEvaluate != null" >
+        #{companyEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyEvaluate != null" >
+        #{agencyEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="platformEvaluate != null" >
+        #{platformEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyComment != null" >
+        #{companyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyComment != null" >
+        #{agencyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="platformComment != null" >
+        #{platformComment,jdbcType=VARCHAR},
+      </if>
+      <if test="stringField != null" >
+        #{stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="intField != null" >
+        #{intField,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chhtf.cmp.pojo.DeclareApplicationExample" resultType="java.lang.Integer" >
+    select count(*) from declare_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update declare_application
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.aptitudeId != null" >
+        aptitude_id = #{record.aptitudeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyId != null" >
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.applicationTime != null" >
+        application_time = #{record.applicationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agencyId != null" >
+        agency_id = #{record.agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.merchandiserId != null" >
+        merchandiser_id = #{record.merchandiserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentProgress != null" >
+        current_progress = #{record.currentProgress,jdbcType=INTEGER},
+      </if>
+      <if test="record.attachmentIds != null" >
+        attachment_ids = #{record.attachmentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.progressIntro != null" >
+        progress_intro = #{record.progressIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.getWay != null" >
+        get_way = #{record.getWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.declareNum != null" >
+        declare_num = #{record.declareNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceFee != null" >
+        service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expectTime != null" >
+        expect_time = #{record.expectTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.predictTime != null" >
+        predict_time = #{record.predictTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualTime != null" >
+        actual_time = #{record.actualTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyEvaluate != null" >
+        company_evaluate = #{record.companyEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agencyEvaluate != null" >
+        agency_evaluate = #{record.agencyEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformEvaluate != null" >
+        platform_evaluate = #{record.platformEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyComment != null" >
+        company_comment = #{record.companyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agencyComment != null" >
+        agency_comment = #{record.agencyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformComment != null" >
+        platform_comment = #{record.platformComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stringField != null" >
+        string_field = #{record.stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intField != null" >
+        int_field = #{record.intField,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update declare_application
+    set id = #{record.id,jdbcType=INTEGER},
+      aptitude_id = #{record.aptitudeId,jdbcType=INTEGER},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      application_time = #{record.applicationTime,jdbcType=VARCHAR},
+      agency_id = #{record.agencyId,jdbcType=INTEGER},
+      merchandiser_id = #{record.merchandiserId,jdbcType=INTEGER},
+      current_progress = #{record.currentProgress,jdbcType=INTEGER},
+      attachment_ids = #{record.attachmentIds,jdbcType=VARCHAR},
+      progress_intro = #{record.progressIntro,jdbcType=VARCHAR},
+      get_way = #{record.getWay,jdbcType=VARCHAR},
+      declare_num = #{record.declareNum,jdbcType=INTEGER},
+      service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+      expect_time = #{record.expectTime,jdbcType=VARCHAR},
+      predict_time = #{record.predictTime,jdbcType=VARCHAR},
+      actual_time = #{record.actualTime,jdbcType=VARCHAR},
+      company_evaluate = #{record.companyEvaluate,jdbcType=VARCHAR},
+      agency_evaluate = #{record.agencyEvaluate,jdbcType=VARCHAR},
+      platform_evaluate = #{record.platformEvaluate,jdbcType=VARCHAR},
+      company_comment = #{record.companyComment,jdbcType=VARCHAR},
+      agency_comment = #{record.agencyComment,jdbcType=VARCHAR},
+      platform_comment = #{record.platformComment,jdbcType=VARCHAR},
+      string_field = #{record.stringField,jdbcType=VARCHAR},
+      int_field = #{record.intField,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chhtf.cmp.pojo.DeclareApplication" >
+    update declare_application
+    <set >
+      <if test="aptitudeId != null" >
+        aptitude_id = #{aptitudeId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationTime != null" >
+        application_time = #{applicationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null" >
+        agency_id = #{agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="merchandiserId != null" >
+        merchandiser_id = #{merchandiserId,jdbcType=INTEGER},
+      </if>
+      <if test="currentProgress != null" >
+        current_progress = #{currentProgress,jdbcType=INTEGER},
+      </if>
+      <if test="attachmentIds != null" >
+        attachment_ids = #{attachmentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="progressIntro != null" >
+        progress_intro = #{progressIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="getWay != null" >
+        get_way = #{getWay,jdbcType=VARCHAR},
+      </if>
+      <if test="declareNum != null" >
+        declare_num = #{declareNum,jdbcType=INTEGER},
+      </if>
+      <if test="serviceFee != null" >
+        service_fee = #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="expectTime != null" >
+        expect_time = #{expectTime,jdbcType=VARCHAR},
+      </if>
+      <if test="predictTime != null" >
+        predict_time = #{predictTime,jdbcType=VARCHAR},
+      </if>
+      <if test="actualTime != null" >
+        actual_time = #{actualTime,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEvaluate != null" >
+        company_evaluate = #{companyEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyEvaluate != null" >
+        agency_evaluate = #{agencyEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="platformEvaluate != null" >
+        platform_evaluate = #{platformEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyComment != null" >
+        company_comment = #{companyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyComment != null" >
+        agency_comment = #{agencyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="platformComment != null" >
+        platform_comment = #{platformComment,jdbcType=VARCHAR},
+      </if>
+      <if test="stringField != null" >
+        string_field = #{stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="intField != null" >
+        int_field = #{intField,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chhtf.cmp.pojo.DeclareApplication" >
+    update declare_application
+    set aptitude_id = #{aptitudeId,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=INTEGER},
+      application_time = #{applicationTime,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=INTEGER},
+      merchandiser_id = #{merchandiserId,jdbcType=INTEGER},
+      current_progress = #{currentProgress,jdbcType=INTEGER},
+      attachment_ids = #{attachmentIds,jdbcType=VARCHAR},
+      progress_intro = #{progressIntro,jdbcType=VARCHAR},
+      get_way = #{getWay,jdbcType=VARCHAR},
+      declare_num = #{declareNum,jdbcType=INTEGER},
+      service_fee = #{serviceFee,jdbcType=DECIMAL},
+      expect_time = #{expectTime,jdbcType=VARCHAR},
+      predict_time = #{predictTime,jdbcType=VARCHAR},
+      actual_time = #{actualTime,jdbcType=VARCHAR},
+      company_evaluate = #{companyEvaluate,jdbcType=VARCHAR},
+      agency_evaluate = #{agencyEvaluate,jdbcType=VARCHAR},
+      platform_evaluate = #{platformEvaluate,jdbcType=VARCHAR},
+      company_comment = #{companyComment,jdbcType=VARCHAR},
+      agency_comment = #{agencyComment,jdbcType=VARCHAR},
+      platform_comment = #{platformComment,jdbcType=VARCHAR},
+      string_field = #{stringField,jdbcType=VARCHAR},
+      int_field = #{intField,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

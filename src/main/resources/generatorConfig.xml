@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+ 
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
+        <!--避免生成重复代码的插件-->
+        <plugin type="com.chhtf.cmp.util.OverIsMergeablePlugin" />
+ 
+        <!--是否在代码中显示注释-->
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+ 
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+						connectionURL="jdbc:mysql://localhost:3306/cmp?serverTimezone=UTC&amp;useSSL=false"  
+        				userId="root" 
+        				password="Aa1234">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+        <!--生成pojo类存放位置-->
+        <javaModelGenerator targetPackage="com.chhtf.cmp.pojo" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成xml映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成mapper类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.chhtf.cmp.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+ 
+        <!--生成对应表及类名-->
+        <!-- <table tableName="clan_member" domainObjectName="ClanMember" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="clan_member_id" sqlStatement="MySQL" identity="true"/>
+        </table> -->  
+        <table tableName="wxuser_info" schema="cmp" catalog="cmp" domainObjectName="WxuserInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>        
+        <table tableName="user_info" schema="cmp" catalog="cmp" domainObjectName="UserInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="agency_info" schema="cmp" catalog="cmp" domainObjectName="AgencyInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="trainee_info" schema="cmp" catalog="cmp" domainObjectName="TraineeInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="follow_record" schema="cmp" catalog="cmp" domainObjectName="FollowRecord" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="certificate_info" schema="cmp" catalog="cmp" domainObjectName="CertificateInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="aptitude_info" schema="cmp" catalog="cmp" domainObjectName="AptitudeInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="subject_info" schema="cmp" catalog="cmp" domainObjectName="SubjectInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="certificate_exam_condition" schema="cmp" catalog="cmp" domainObjectName="CertificateExamCondition" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="aptitude_declare_condition" schema="cmp" catalog="cmp" domainObjectName="AptitudeDeclareCondition" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="knowledge_point" schema="cmp" catalog="cmp" domainObjectName="KnowledgePoint" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="question_bank" schema="cmp" catalog="cmp" domainObjectName="QuestionBank" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="question_option" schema="cmp" catalog="cmp" domainObjectName="QuestionOption" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="examination_paper" schema="cmp" catalog="cmp" domainObjectName="ExaminationPaper" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>    
+		<table tableName="paper_bank_relation" schema="cmp" catalog="cmp" domainObjectName="PaperBankRelation" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="answer_record" schema="cmp" catalog="cmp" domainObjectName="AnswerRecord" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="video_info" schema="cmp" catalog="cmp" domainObjectName="VideoInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="answer_bank_relation" schema="cmp" catalog="cmp" domainObjectName="AnswerBankRelation" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="test_application" schema="cmp" catalog="cmp" domainObjectName="TestApplication" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="declare_application" schema="cmp" catalog="cmp" domainObjectName="DeclareApplication" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="dictionary_type" schema="cmp" catalog="cmp" domainObjectName="DictionaryType" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="dictionary_data" schema="cmp" catalog="cmp" domainObjectName="DictionaryData" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="agency_relation" schema="cmp" catalog="cmp" domainObjectName="AgencyRelation" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+        <table tableName="employee_info" schema="cmp" catalog="cmp" domainObjectName="EmployeeInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chhtf.cmp.mapper.TestApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.chhtf.cmp.pojo.TestApplication" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="certificate_id" property="certificateId" jdbcType="INTEGER" />
+    <result column="test_application_type" property="testApplicationType" jdbcType="INTEGER" />
+    <result column="trainee_id" property="traineeId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="application_time" property="applicationTime" jdbcType="VARCHAR" />
+    <result column="get_certificate_way" property="getCertificateWay" jdbcType="VARCHAR" />
+    <result column="agency_id" property="agencyId" jdbcType="INTEGER" />
+    <result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+    <result column="current_progress" property="currentProgress" jdbcType="INTEGER" />
+    <result column="reference_time" property="referenceTime" jdbcType="VARCHAR" />
+    <result column="progress_intro" property="progressIntro" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="attachments" property="attachments" jdbcType="VARCHAR" />
+    <result column="service_fee" property="serviceFee" jdbcType="DECIMAL" />
+    <result column="trainee_evaluate" property="traineeEvaluate" jdbcType="VARCHAR" />
+    <result column="agency_evaluate" property="agencyEvaluate" jdbcType="VARCHAR" />
+    <result column="platform_evaluate" property="platformEvaluate" jdbcType="VARCHAR" />
+    <result column="trainee_comment" property="traineeComment" jdbcType="VARCHAR" />
+    <result column="agency_comment" property="agencyComment" jdbcType="VARCHAR" />
+    <result column="platform_comment" property="platformComment" jdbcType="VARCHAR" />
+    <result column="be_allocate" property="beAllocate" jdbcType="INTEGER" />
+    <result column="string_field" property="stringField" jdbcType="VARCHAR" />
+    <result column="int_field" property="intField" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, certificate_id, test_application_type, trainee_id, user_id, application_time, 
+    get_certificate_way, agency_id, employee_id, current_progress, reference_time, progress_intro, 
+    comment, attachments, service_fee, trainee_evaluate, agency_evaluate, platform_evaluate, 
+    trainee_comment, agency_comment, platform_comment, be_allocate, string_field, int_field, 
+    create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chhtf.cmp.pojo.TestApplicationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from test_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from test_application
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from test_application
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chhtf.cmp.pojo.TestApplicationExample" >
+    delete from test_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chhtf.cmp.pojo.TestApplication" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into test_application (certificate_id, test_application_type, 
+      trainee_id, user_id, application_time, 
+      get_certificate_way, agency_id, employee_id, 
+      current_progress, reference_time, progress_intro, 
+      comment, attachments, service_fee, 
+      trainee_evaluate, agency_evaluate, platform_evaluate, 
+      trainee_comment, agency_comment, platform_comment, 
+      be_allocate, string_field, int_field, 
+      create_time, update_time)
+    values (#{certificateId,jdbcType=INTEGER}, #{testApplicationType,jdbcType=INTEGER}, 
+      #{traineeId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{applicationTime,jdbcType=VARCHAR}, 
+      #{getCertificateWay,jdbcType=VARCHAR}, #{agencyId,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, 
+      #{currentProgress,jdbcType=INTEGER}, #{referenceTime,jdbcType=VARCHAR}, #{progressIntro,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{attachments,jdbcType=VARCHAR}, #{serviceFee,jdbcType=DECIMAL}, 
+      #{traineeEvaluate,jdbcType=VARCHAR}, #{agencyEvaluate,jdbcType=VARCHAR}, #{platformEvaluate,jdbcType=VARCHAR}, 
+      #{traineeComment,jdbcType=VARCHAR}, #{agencyComment,jdbcType=VARCHAR}, #{platformComment,jdbcType=VARCHAR}, 
+      #{beAllocate,jdbcType=INTEGER}, #{stringField,jdbcType=VARCHAR}, #{intField,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chhtf.cmp.pojo.TestApplication" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into test_application
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="certificateId != null" >
+        certificate_id,
+      </if>
+      <if test="testApplicationType != null" >
+        test_application_type,
+      </if>
+      <if test="traineeId != null" >
+        trainee_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="applicationTime != null" >
+        application_time,
+      </if>
+      <if test="getCertificateWay != null" >
+        get_certificate_way,
+      </if>
+      <if test="agencyId != null" >
+        agency_id,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="currentProgress != null" >
+        current_progress,
+      </if>
+      <if test="referenceTime != null" >
+        reference_time,
+      </if>
+      <if test="progressIntro != null" >
+        progress_intro,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="attachments != null" >
+        attachments,
+      </if>
+      <if test="serviceFee != null" >
+        service_fee,
+      </if>
+      <if test="traineeEvaluate != null" >
+        trainee_evaluate,
+      </if>
+      <if test="agencyEvaluate != null" >
+        agency_evaluate,
+      </if>
+      <if test="platformEvaluate != null" >
+        platform_evaluate,
+      </if>
+      <if test="traineeComment != null" >
+        trainee_comment,
+      </if>
+      <if test="agencyComment != null" >
+        agency_comment,
+      </if>
+      <if test="platformComment != null" >
+        platform_comment,
+      </if>
+      <if test="beAllocate != null" >
+        be_allocate,
+      </if>
+      <if test="stringField != null" >
+        string_field,
+      </if>
+      <if test="intField != null" >
+        int_field,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="certificateId != null" >
+        #{certificateId,jdbcType=INTEGER},
+      </if>
+      <if test="testApplicationType != null" >
+        #{testApplicationType,jdbcType=INTEGER},
+      </if>
+      <if test="traineeId != null" >
+        #{traineeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationTime != null" >
+        #{applicationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="getCertificateWay != null" >
+        #{getCertificateWay,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null" >
+        #{agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="currentProgress != null" >
+        #{currentProgress,jdbcType=INTEGER},
+      </if>
+      <if test="referenceTime != null" >
+        #{referenceTime,jdbcType=VARCHAR},
+      </if>
+      <if test="progressIntro != null" >
+        #{progressIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="attachments != null" >
+        #{attachments,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceFee != null" >
+        #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="traineeEvaluate != null" >
+        #{traineeEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyEvaluate != null" >
+        #{agencyEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="platformEvaluate != null" >
+        #{platformEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="traineeComment != null" >
+        #{traineeComment,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyComment != null" >
+        #{agencyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="platformComment != null" >
+        #{platformComment,jdbcType=VARCHAR},
+      </if>
+      <if test="beAllocate != null" >
+        #{beAllocate,jdbcType=INTEGER},
+      </if>
+      <if test="stringField != null" >
+        #{stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="intField != null" >
+        #{intField,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chhtf.cmp.pojo.TestApplicationExample" resultType="java.lang.Integer" >
+    select count(*) from test_application
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update test_application
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.certificateId != null" >
+        certificate_id = #{record.certificateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.testApplicationType != null" >
+        test_application_type = #{record.testApplicationType,jdbcType=INTEGER},
+      </if>
+      <if test="record.traineeId != null" >
+        trainee_id = #{record.traineeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.applicationTime != null" >
+        application_time = #{record.applicationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.getCertificateWay != null" >
+        get_certificate_way = #{record.getCertificateWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agencyId != null" >
+        agency_id = #{record.agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeeId != null" >
+        employee_id = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentProgress != null" >
+        current_progress = #{record.currentProgress,jdbcType=INTEGER},
+      </if>
+      <if test="record.referenceTime != null" >
+        reference_time = #{record.referenceTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.progressIntro != null" >
+        progress_intro = #{record.progressIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachments != null" >
+        attachments = #{record.attachments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceFee != null" >
+        service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.traineeEvaluate != null" >
+        trainee_evaluate = #{record.traineeEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agencyEvaluate != null" >
+        agency_evaluate = #{record.agencyEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformEvaluate != null" >
+        platform_evaluate = #{record.platformEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.traineeComment != null" >
+        trainee_comment = #{record.traineeComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agencyComment != null" >
+        agency_comment = #{record.agencyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformComment != null" >
+        platform_comment = #{record.platformComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beAllocate != null" >
+        be_allocate = #{record.beAllocate,jdbcType=INTEGER},
+      </if>
+      <if test="record.stringField != null" >
+        string_field = #{record.stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intField != null" >
+        int_field = #{record.intField,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update test_application
+    set id = #{record.id,jdbcType=INTEGER},
+      certificate_id = #{record.certificateId,jdbcType=INTEGER},
+      test_application_type = #{record.testApplicationType,jdbcType=INTEGER},
+      trainee_id = #{record.traineeId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      application_time = #{record.applicationTime,jdbcType=VARCHAR},
+      get_certificate_way = #{record.getCertificateWay,jdbcType=VARCHAR},
+      agency_id = #{record.agencyId,jdbcType=INTEGER},
+      employee_id = #{record.employeeId,jdbcType=INTEGER},
+      current_progress = #{record.currentProgress,jdbcType=INTEGER},
+      reference_time = #{record.referenceTime,jdbcType=VARCHAR},
+      progress_intro = #{record.progressIntro,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      attachments = #{record.attachments,jdbcType=VARCHAR},
+      service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+      trainee_evaluate = #{record.traineeEvaluate,jdbcType=VARCHAR},
+      agency_evaluate = #{record.agencyEvaluate,jdbcType=VARCHAR},
+      platform_evaluate = #{record.platformEvaluate,jdbcType=VARCHAR},
+      trainee_comment = #{record.traineeComment,jdbcType=VARCHAR},
+      agency_comment = #{record.agencyComment,jdbcType=VARCHAR},
+      platform_comment = #{record.platformComment,jdbcType=VARCHAR},
+      be_allocate = #{record.beAllocate,jdbcType=INTEGER},
+      string_field = #{record.stringField,jdbcType=VARCHAR},
+      int_field = #{record.intField,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chhtf.cmp.pojo.TestApplication" >
+    update test_application
+    <set >
+      <if test="certificateId != null" >
+        certificate_id = #{certificateId,jdbcType=INTEGER},
+      </if>
+      <if test="testApplicationType != null" >
+        test_application_type = #{testApplicationType,jdbcType=INTEGER},
+      </if>
+      <if test="traineeId != null" >
+        trainee_id = #{traineeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationTime != null" >
+        application_time = #{applicationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="getCertificateWay != null" >
+        get_certificate_way = #{getCertificateWay,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null" >
+        agency_id = #{agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="currentProgress != null" >
+        current_progress = #{currentProgress,jdbcType=INTEGER},
+      </if>
+      <if test="referenceTime != null" >
+        reference_time = #{referenceTime,jdbcType=VARCHAR},
+      </if>
+      <if test="progressIntro != null" >
+        progress_intro = #{progressIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="attachments != null" >
+        attachments = #{attachments,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceFee != null" >
+        service_fee = #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="traineeEvaluate != null" >
+        trainee_evaluate = #{traineeEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyEvaluate != null" >
+        agency_evaluate = #{agencyEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="platformEvaluate != null" >
+        platform_evaluate = #{platformEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="traineeComment != null" >
+        trainee_comment = #{traineeComment,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyComment != null" >
+        agency_comment = #{agencyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="platformComment != null" >
+        platform_comment = #{platformComment,jdbcType=VARCHAR},
+      </if>
+      <if test="beAllocate != null" >
+        be_allocate = #{beAllocate,jdbcType=INTEGER},
+      </if>
+      <if test="stringField != null" >
+        string_field = #{stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="intField != null" >
+        int_field = #{intField,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chhtf.cmp.pojo.TestApplication" >
+    update test_application
+    set certificate_id = #{certificateId,jdbcType=INTEGER},
+      test_application_type = #{testApplicationType,jdbcType=INTEGER},
+      trainee_id = #{traineeId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      application_time = #{applicationTime,jdbcType=VARCHAR},
+      get_certificate_way = #{getCertificateWay,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=INTEGER},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      current_progress = #{currentProgress,jdbcType=INTEGER},
+      reference_time = #{referenceTime,jdbcType=VARCHAR},
+      progress_intro = #{progressIntro,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      attachments = #{attachments,jdbcType=VARCHAR},
+      service_fee = #{serviceFee,jdbcType=DECIMAL},
+      trainee_evaluate = #{traineeEvaluate,jdbcType=VARCHAR},
+      agency_evaluate = #{agencyEvaluate,jdbcType=VARCHAR},
+      platform_evaluate = #{platformEvaluate,jdbcType=VARCHAR},
+      trainee_comment = #{traineeComment,jdbcType=VARCHAR},
+      agency_comment = #{agencyComment,jdbcType=VARCHAR},
+      platform_comment = #{platformComment,jdbcType=VARCHAR},
+      be_allocate = #{beAllocate,jdbcType=INTEGER},
+      string_field = #{stringField,jdbcType=VARCHAR},
+      int_field = #{intField,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

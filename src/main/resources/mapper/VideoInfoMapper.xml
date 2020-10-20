@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chhtf.cmp.mapper.VideoInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.chhtf.cmp.pojo.VideoInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="video_name" property="videoName" jdbcType="VARCHAR" />
+    <result column="video_intro" property="videoIntro" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="agency_id" property="agencyId" jdbcType="INTEGER" />
+    <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="paper_id" property="paperId" jdbcType="INTEGER" />
+    <result column="paper_name" property="paperName" jdbcType="VARCHAR" />
+    <result column="creater_id" property="createrId" jdbcType="INTEGER" />
+    <result column="entity_type" property="entityType" jdbcType="INTEGER" />
+    <result column="entity_id" property="entityId" jdbcType="INTEGER" />
+    <result column="entity_name" property="entityName" jdbcType="VARCHAR" />
+    <result column="points" property="points" jdbcType="VARCHAR" />
+    <result column="video_source" property="videoSource" jdbcType="VARCHAR" />
+    <result column="video_type" property="videoType" jdbcType="VARCHAR" />
+    <result column="knowledge_type" property="knowledgeType" jdbcType="INTEGER" />
+    <result column="string_field" property="stringField" jdbcType="VARCHAR" />
+    <result column="int_field" property="intField" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, video_name, video_intro, user_id, agency_id, video_url, image_url, paper_id, 
+    paper_name, creater_id, entity_type, entity_id, entity_name, points, video_source, 
+    video_type, knowledge_type, string_field, int_field, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chhtf.cmp.pojo.VideoInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from video_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from video_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from video_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chhtf.cmp.pojo.VideoInfoExample" >
+    delete from video_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chhtf.cmp.pojo.VideoInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into video_info (video_name, video_intro, user_id, 
+      agency_id, video_url, image_url, 
+      paper_id, paper_name, creater_id, 
+      entity_type, entity_id, entity_name, 
+      points, video_source, video_type, 
+      knowledge_type, string_field, int_field, 
+      create_time, update_time)
+    values (#{videoName,jdbcType=VARCHAR}, #{videoIntro,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{agencyId,jdbcType=INTEGER}, #{videoUrl,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{paperId,jdbcType=INTEGER}, #{paperName,jdbcType=VARCHAR}, #{createrId,jdbcType=INTEGER}, 
+      #{entityType,jdbcType=INTEGER}, #{entityId,jdbcType=INTEGER}, #{entityName,jdbcType=VARCHAR}, 
+      #{points,jdbcType=VARCHAR}, #{videoSource,jdbcType=VARCHAR}, #{videoType,jdbcType=VARCHAR}, 
+      #{knowledgeType,jdbcType=INTEGER}, #{stringField,jdbcType=VARCHAR}, #{intField,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chhtf.cmp.pojo.VideoInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into video_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="videoName != null" >
+        video_name,
+      </if>
+      <if test="videoIntro != null" >
+        video_intro,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="agencyId != null" >
+        agency_id,
+      </if>
+      <if test="videoUrl != null" >
+        video_url,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="paperId != null" >
+        paper_id,
+      </if>
+      <if test="paperName != null" >
+        paper_name,
+      </if>
+      <if test="createrId != null" >
+        creater_id,
+      </if>
+      <if test="entityType != null" >
+        entity_type,
+      </if>
+      <if test="entityId != null" >
+        entity_id,
+      </if>
+      <if test="entityName != null" >
+        entity_name,
+      </if>
+      <if test="points != null" >
+        points,
+      </if>
+      <if test="videoSource != null" >
+        video_source,
+      </if>
+      <if test="videoType != null" >
+        video_type,
+      </if>
+      <if test="knowledgeType != null" >
+        knowledge_type,
+      </if>
+      <if test="stringField != null" >
+        string_field,
+      </if>
+      <if test="intField != null" >
+        int_field,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="videoName != null" >
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoIntro != null" >
+        #{videoIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="agencyId != null" >
+        #{agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="videoUrl != null" >
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paperId != null" >
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="paperName != null" >
+        #{paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="createrId != null" >
+        #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="entityType != null" >
+        #{entityType,jdbcType=INTEGER},
+      </if>
+      <if test="entityId != null" >
+        #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="entityName != null" >
+        #{entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSource != null" >
+        #{videoSource,jdbcType=VARCHAR},
+      </if>
+      <if test="videoType != null" >
+        #{videoType,jdbcType=VARCHAR},
+      </if>
+      <if test="knowledgeType != null" >
+        #{knowledgeType,jdbcType=INTEGER},
+      </if>
+      <if test="stringField != null" >
+        #{stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="intField != null" >
+        #{intField,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chhtf.cmp.pojo.VideoInfoExample" resultType="java.lang.Integer" >
+    select count(*) from video_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update video_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoName != null" >
+        video_name = #{record.videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoIntro != null" >
+        video_intro = #{record.videoIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.agencyId != null" >
+        agency_id = #{record.agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoUrl != null" >
+        video_url = #{record.videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageUrl != null" >
+        image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paperId != null" >
+        paper_id = #{record.paperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paperName != null" >
+        paper_name = #{record.paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createrId != null" >
+        creater_id = #{record.createrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityType != null" >
+        entity_type = #{record.entityType,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityId != null" >
+        entity_id = #{record.entityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityName != null" >
+        entity_name = #{record.entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.points != null" >
+        points = #{record.points,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoSource != null" >
+        video_source = #{record.videoSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoType != null" >
+        video_type = #{record.videoType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.knowledgeType != null" >
+        knowledge_type = #{record.knowledgeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.stringField != null" >
+        string_field = #{record.stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intField != null" >
+        int_field = #{record.intField,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update video_info
+    set id = #{record.id,jdbcType=INTEGER},
+      video_name = #{record.videoName,jdbcType=VARCHAR},
+      video_intro = #{record.videoIntro,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      agency_id = #{record.agencyId,jdbcType=INTEGER},
+      video_url = #{record.videoUrl,jdbcType=VARCHAR},
+      image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      paper_id = #{record.paperId,jdbcType=INTEGER},
+      paper_name = #{record.paperName,jdbcType=VARCHAR},
+      creater_id = #{record.createrId,jdbcType=INTEGER},
+      entity_type = #{record.entityType,jdbcType=INTEGER},
+      entity_id = #{record.entityId,jdbcType=INTEGER},
+      entity_name = #{record.entityName,jdbcType=VARCHAR},
+      points = #{record.points,jdbcType=VARCHAR},
+      video_source = #{record.videoSource,jdbcType=VARCHAR},
+      video_type = #{record.videoType,jdbcType=VARCHAR},
+      knowledge_type = #{record.knowledgeType,jdbcType=INTEGER},
+      string_field = #{record.stringField,jdbcType=VARCHAR},
+      int_field = #{record.intField,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chhtf.cmp.pojo.VideoInfo" >
+    update video_info
+    <set >
+      <if test="videoName != null" >
+        video_name = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoIntro != null" >
+        video_intro = #{videoIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="agencyId != null" >
+        agency_id = #{agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="videoUrl != null" >
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paperId != null" >
+        paper_id = #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="paperName != null" >
+        paper_name = #{paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="createrId != null" >
+        creater_id = #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="entityType != null" >
+        entity_type = #{entityType,jdbcType=INTEGER},
+      </if>
+      <if test="entityId != null" >
+        entity_id = #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="entityName != null" >
+        entity_name = #{entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null" >
+        points = #{points,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSource != null" >
+        video_source = #{videoSource,jdbcType=VARCHAR},
+      </if>
+      <if test="videoType != null" >
+        video_type = #{videoType,jdbcType=VARCHAR},
+      </if>
+      <if test="knowledgeType != null" >
+        knowledge_type = #{knowledgeType,jdbcType=INTEGER},
+      </if>
+      <if test="stringField != null" >
+        string_field = #{stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="intField != null" >
+        int_field = #{intField,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chhtf.cmp.pojo.VideoInfo" >
+    update video_info
+    set video_name = #{videoName,jdbcType=VARCHAR},
+      video_intro = #{videoIntro,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      agency_id = #{agencyId,jdbcType=INTEGER},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      paper_id = #{paperId,jdbcType=INTEGER},
+      paper_name = #{paperName,jdbcType=VARCHAR},
+      creater_id = #{createrId,jdbcType=INTEGER},
+      entity_type = #{entityType,jdbcType=INTEGER},
+      entity_id = #{entityId,jdbcType=INTEGER},
+      entity_name = #{entityName,jdbcType=VARCHAR},
+      points = #{points,jdbcType=VARCHAR},
+      video_source = #{videoSource,jdbcType=VARCHAR},
+      video_type = #{videoType,jdbcType=VARCHAR},
+      knowledge_type = #{knowledgeType,jdbcType=INTEGER},
+      string_field = #{stringField,jdbcType=VARCHAR},
+      int_field = #{intField,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

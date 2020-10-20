@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chhtf.cmp.mapper.AgencyRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.chhtf.cmp.pojo.AgencyRelation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="agency_id" property="agencyId" jdbcType="INTEGER" />
+    <result column="entity_name" property="entityName" jdbcType="VARCHAR" />
+    <result column="relation_type" property="relationType" jdbcType="VARCHAR" />
+    <result column="relater_id" property="relaterId" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="certificate_type" property="certificateType" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="belong_type" property="belongType" jdbcType="VARCHAR" />
+    <result column="major" property="major" jdbcType="VARCHAR" />
+    <result column="certification_authority" property="certificationAuthority" jdbcType="VARCHAR" />
+    <result column="examination_time" property="examinationTime" jdbcType="VARCHAR" />
+    <result column="examination_intro" property="examinationIntro" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="deal_flag" property="dealFlag" jdbcType="INTEGER" />
+    <result column="string_field" property="stringField" jdbcType="VARCHAR" />
+    <result column="int_field" property="intField" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, agency_id, entity_name, relation_type, relater_id, location, certificate_type, 
+    industry, belong_type, major, certification_authority, examination_time, examination_intro, 
+    comment, deal_flag, string_field, int_field, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chhtf.cmp.pojo.AgencyRelationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from agency_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from agency_relation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from agency_relation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chhtf.cmp.pojo.AgencyRelationExample" >
+    delete from agency_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chhtf.cmp.pojo.AgencyRelation" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agency_relation (agency_id, entity_name, relation_type, 
+      relater_id, location, certificate_type, 
+      industry, belong_type, major, 
+      certification_authority, examination_time, 
+      examination_intro, comment, deal_flag, 
+      string_field, int_field, create_time, 
+      update_time)
+    values (#{agencyId,jdbcType=INTEGER}, #{entityName,jdbcType=VARCHAR}, #{relationType,jdbcType=VARCHAR}, 
+      #{relaterId,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{certificateType,jdbcType=VARCHAR}, 
+      #{industry,jdbcType=VARCHAR}, #{belongType,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{certificationAuthority,jdbcType=VARCHAR}, #{examinationTime,jdbcType=VARCHAR}, 
+      #{examinationIntro,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{dealFlag,jdbcType=INTEGER}, 
+      #{stringField,jdbcType=VARCHAR}, #{intField,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chhtf.cmp.pojo.AgencyRelation" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agency_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="agencyId != null" >
+        agency_id,
+      </if>
+      <if test="entityName != null" >
+        entity_name,
+      </if>
+      <if test="relationType != null" >
+        relation_type,
+      </if>
+      <if test="relaterId != null" >
+        relater_id,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="certificateType != null" >
+        certificate_type,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="belongType != null" >
+        belong_type,
+      </if>
+      <if test="major != null" >
+        major,
+      </if>
+      <if test="certificationAuthority != null" >
+        certification_authority,
+      </if>
+      <if test="examinationTime != null" >
+        examination_time,
+      </if>
+      <if test="examinationIntro != null" >
+        examination_intro,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="dealFlag != null" >
+        deal_flag,
+      </if>
+      <if test="stringField != null" >
+        string_field,
+      </if>
+      <if test="intField != null" >
+        int_field,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="agencyId != null" >
+        #{agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="entityName != null" >
+        #{entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationType != null" >
+        #{relationType,jdbcType=VARCHAR},
+      </if>
+      <if test="relaterId != null" >
+        #{relaterId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateType != null" >
+        #{certificateType,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="belongType != null" >
+        #{belongType,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationAuthority != null" >
+        #{certificationAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationTime != null" >
+        #{examinationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationIntro != null" >
+        #{examinationIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="dealFlag != null" >
+        #{dealFlag,jdbcType=INTEGER},
+      </if>
+      <if test="stringField != null" >
+        #{stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="intField != null" >
+        #{intField,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chhtf.cmp.pojo.AgencyRelationExample" resultType="java.lang.Integer" >
+    select count(*) from agency_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update agency_relation
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.agencyId != null" >
+        agency_id = #{record.agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityName != null" >
+        entity_name = #{record.entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relationType != null" >
+        relation_type = #{record.relationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relaterId != null" >
+        relater_id = #{record.relaterId,jdbcType=INTEGER},
+      </if>
+      <if test="record.location != null" >
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificateType != null" >
+        certificate_type = #{record.certificateType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null" >
+        industry = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.belongType != null" >
+        belong_type = #{record.belongType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.major != null" >
+        major = #{record.major,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificationAuthority != null" >
+        certification_authority = #{record.certificationAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examinationTime != null" >
+        examination_time = #{record.examinationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examinationIntro != null" >
+        examination_intro = #{record.examinationIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealFlag != null" >
+        deal_flag = #{record.dealFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.stringField != null" >
+        string_field = #{record.stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intField != null" >
+        int_field = #{record.intField,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update agency_relation
+    set id = #{record.id,jdbcType=INTEGER},
+      agency_id = #{record.agencyId,jdbcType=INTEGER},
+      entity_name = #{record.entityName,jdbcType=VARCHAR},
+      relation_type = #{record.relationType,jdbcType=VARCHAR},
+      relater_id = #{record.relaterId,jdbcType=INTEGER},
+      location = #{record.location,jdbcType=VARCHAR},
+      certificate_type = #{record.certificateType,jdbcType=VARCHAR},
+      industry = #{record.industry,jdbcType=VARCHAR},
+      belong_type = #{record.belongType,jdbcType=VARCHAR},
+      major = #{record.major,jdbcType=VARCHAR},
+      certification_authority = #{record.certificationAuthority,jdbcType=VARCHAR},
+      examination_time = #{record.examinationTime,jdbcType=VARCHAR},
+      examination_intro = #{record.examinationIntro,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      deal_flag = #{record.dealFlag,jdbcType=INTEGER},
+      string_field = #{record.stringField,jdbcType=VARCHAR},
+      int_field = #{record.intField,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chhtf.cmp.pojo.AgencyRelation" >
+    update agency_relation
+    <set >
+      <if test="agencyId != null" >
+        agency_id = #{agencyId,jdbcType=INTEGER},
+      </if>
+      <if test="entityName != null" >
+        entity_name = #{entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationType != null" >
+        relation_type = #{relationType,jdbcType=VARCHAR},
+      </if>
+      <if test="relaterId != null" >
+        relater_id = #{relaterId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateType != null" >
+        certificate_type = #{certificateType,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="belongType != null" >
+        belong_type = #{belongType,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationAuthority != null" >
+        certification_authority = #{certificationAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationTime != null" >
+        examination_time = #{examinationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationIntro != null" >
+        examination_intro = #{examinationIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="dealFlag != null" >
+        deal_flag = #{dealFlag,jdbcType=INTEGER},
+      </if>
+      <if test="stringField != null" >
+        string_field = #{stringField,jdbcType=VARCHAR},
+      </if>
+      <if test="intField != null" >
+        int_field = #{intField,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chhtf.cmp.pojo.AgencyRelation" >
+    update agency_relation
+    set agency_id = #{agencyId,jdbcType=INTEGER},
+      entity_name = #{entityName,jdbcType=VARCHAR},
+      relation_type = #{relationType,jdbcType=VARCHAR},
+      relater_id = #{relaterId,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      certificate_type = #{certificateType,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      belong_type = #{belongType,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      certification_authority = #{certificationAuthority,jdbcType=VARCHAR},
+      examination_time = #{examinationTime,jdbcType=VARCHAR},
+      examination_intro = #{examinationIntro,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      deal_flag = #{dealFlag,jdbcType=INTEGER},
+      string_field = #{stringField,jdbcType=VARCHAR},
+      int_field = #{intField,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
